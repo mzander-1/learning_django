@@ -12,6 +12,7 @@ class Kunde(models.Model):
     def __str__(self):
         return self.name
 
+
 class Artikel(models.Model):
     name = models.CharField(max_length=200, null=True)
     beschreibung = models.TextField(null=True, blank=True)
@@ -20,6 +21,7 @@ class Artikel(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Bestellung(models.Model):
     kunde = models.ForeignKey(Kunde, on_delete=models.SET_NULL, null=True, blank=True)
@@ -30,6 +32,9 @@ class Bestellung(models.Model):
     def __str__(self):
         return str(self.id)
 
+    @property
+    
+
 class BestellteArtikel(models.Model):
     artikel = models.ForeignKey(Artikel, on_delete=models.SET_NULL, null=True, blank=True)
     bestellung = models.ForeignKey(Bestellung, on_delete=models.SET_NULL, null=True, blank=True)
@@ -38,6 +43,12 @@ class BestellteArtikel(models.Model):
 
     def __str__(self):
         return self.artikel.name
+
+    @property
+    def get_summe(self):
+        summe = self.artikel.preis * self.menge
+        return summe
+
 
 class Adresse(models.Model):
     kunde = models.ForeignKey(Kunde, on_delete=models.SET_NULL, null=True, blank=True)
