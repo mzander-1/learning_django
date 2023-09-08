@@ -11,7 +11,15 @@ def shop(request):
 
 
 def warenkorb(request):
-    return render(request, "shop/warenkorb.html")
+    if request.user.is_authenticated:
+        kunde = request.user.kunde
+        bestellung, created = Bestellung.objects.get_or_create(kunde=kunde, erledigt=False)
+        artikels = bestellung.bestellteartikel_set.all()
+    else:
+        artikels = []
+
+    ctx = {'artikels': artikels}
+    return render(request, "shop/warenkorb.html", ctx)
 
 
 def kasse(request):
