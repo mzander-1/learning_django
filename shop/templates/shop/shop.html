@@ -7,16 +7,18 @@
             <div class="col mb-3">
                 <div class="card" style="max-width: 25rem;">
                     {% if artikel.bild %}
-                    <img src="{{artikel.bild.url}}" class="card-img-top" alt="Artikelbild">
-                    {% else  %}
-                    <img src="{% static 'images/dummy.jpg' %}" alt="dummy">
+                        <img src="{{ artikel.bild.url }}" class="card-img-top" alt="Artikelbild">
+                    {% else %}
+                        <img src="{% static 'images/dummy.jpg' %}" alt="dummy">
                     {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ artikel.name }}</h5>
                         <p class="card-text">{{ artikel.beschreibung }}</p>
                         <div class="d-flex justify-content-between">
                             <h5 class="text-secondary">{{ artikel.preis|floatformat:2 }}€</h5>
-                            <a href="#" class="btn btn-outline-danger">Bestellen</a>
+                            <button data-artikel="{{ artikel.id }}" data-action="bestellen"
+                                    class="btn btn-outline-danger warenkorb-bestellen">Bestellen
+                            </button>
                         </div>
                     </div>
                 </div>

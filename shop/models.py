@@ -33,6 +33,15 @@ class Bestellung(models.Model):
         return str(self.id)
 
     @property
+    def get_gesamtpreis(self):
+        bestellteartikels = self.bestellteartikel_set.all()
+        gesamtpreis = sum(artikel.get_summe for artikel in bestellteartikels)
+        return gesamtpreis
+
+    @property
+    def get_gesamtmenge(self):
+        bestellteartikels = self.bestellteartikel_set.all()
+        return sum(artikel.menge for artikel in bestellteartikels)
     
 
 class BestellteArtikel(models.Model):
