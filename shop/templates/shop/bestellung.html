@@ -2,14 +2,12 @@
 {% load static %}
 
 {% block content %}
-    {% if artikels %}
         <div class="row mt-4">
             <div class="col-12">
                 <div class="shadow p-2 mb-4">
                     <div class="d-flex">
-                        <h3 class="me-auto fw-bold p-2">Warenkorb</h3>
-                        <p class="fw-bold p-2">Gesamtpreis: {{ bestellung.get_gesamtpreis|floatformat:2 }} €</p>
-                        <p><a class="btn btn-danger" href="{% url 'kasse' %}">Kasse</a></p>
+                        <h3 class="me-auto fw-bold p-2">Bestellübersicht</h3>
+                        <p class="p-2">AuftragsID: {{ bestellung.auftrags_id }}</p>
                     </div>
 
                 </div>
@@ -37,13 +35,6 @@
                                 <td>{{ artikel.menge }}</td>
                                 <td>{{ artikel.artikel.preis|floatformat:2 }} €</td>
                                 <td>{{ artikel.get_summe|floatformat:2 }} €</td>
-                                <td>
-
-
-                                    <button data-artikel={{ artikel.artikel.id }} data-action="entfernen"
-                                            class="btn btn-outline-danger warenkorb-bestellen">-
-                                    </button>
-                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -51,7 +42,4 @@
                 </div>
             </div>
         </div>
-    {% else %}
-        <h2>Dein Warenkorb ist leer!</h2>
-    {% endif %}
 {% endblock content %}

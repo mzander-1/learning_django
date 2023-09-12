@@ -5,10 +5,17 @@
         <a class="navbar-brand link-light" href="{% url 'shop' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
         <div class="navbar-nav">
             <div class="d-flex align-items-center">
-                <a class="nav-link btn btn-light p-2" href="#">Login</a>
+            {% if request.user.is_authenticated %}
+                <h5 class="text-light m-2">Hallo {{ request.user|title }}</h5>
+                <a class="nav-link btn btn-light p-2" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a class="nav-link btn btn-light p-2" href="{% url 'login' %}">Login</a>
+            {% endif %}
                 <a class="nav-link link-light p-2" href="{% url 'warenkorb' %}"><img
                         src="{% static 'images/floppy.png' %}" alt="">
-                    <span class="badge rounded-pill bg-danger position-absolute top-25 start-25 translate-middle">5</span>
+                    {% if menge >= 1 %}
+                    <span class="badge rounded-pill bg-danger position-absolute top-25 start-25 translate-middle">{{ menge }}</span>
+                    {% endif %}
                 </a>
             </div>
         </div>

@@ -10,7 +10,7 @@ class Kunde(models.Model):
     email = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class Artikel(models.Model):
@@ -20,7 +20,7 @@ class Artikel(models.Model):
     bild = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class Bestellung(models.Model):
@@ -66,7 +66,7 @@ class Adresse(models.Model):
     plz = models.CharField(max_length=200, null=True)
     stadt = models.CharField(max_length=200, null=True)
     land = models.CharField(max_length=200, null=True)
-    datum = models.CharField(max_length=200, null=True)
+    datum = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.adresse
+        return str(self.adresse)
