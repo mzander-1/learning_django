@@ -17,7 +17,7 @@
                 <div class="d-flex">
                     <p class="me-auto fw-bold p-2">Menge: {{bestellung.get_gesamtmenge}}</p>
                     <p class="fw-bold p-2">Gesamtpreis: {{bestellung.get_gesamtpreis|floatformat:2}} €</p>
-                    <input type="number" class="d-none" id="gesamtpreis" value="{{bestellung.get_gesamtpreis|floatformat:2}}">
+                    <input type="number" class="d-none" id="gesamtpreis" value={{bestellung.get_gesamtpreis|floatformat:2}}>
                 </div>
             </div>
         </div>
@@ -26,11 +26,19 @@
                 <form id="formular" class="row g-3">
                     <div class="col-md-6">
                       <label for="inputName" class="form-label">Name</label>
+                      {% if request.user.is_authenticated %}
                       <input type="text" class="form-control" id="inputName" value={{request.user|title}} required>
+                      {% else %}
+                      <input type="text" class="form-control" id="inputName" required>
+                      {% endif %}
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail" class="form-label">Email</label>
+                        {% if request.user.is_authenticated %}
                         <input type="email" class="form-control" id="inputEmail" value={{request.user.email}} required>
+                        {% else %}
+                        <input type="email" class="form-control" id="inputEmail" required>
+                        {% endif %}
                     </div>
                     <div class="col-12">
                       <label for="inputAddress" class="form-label">Adresse</label>
